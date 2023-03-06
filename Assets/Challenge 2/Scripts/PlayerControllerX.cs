@@ -2,32 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControllerX : MonoBehaviour
-{
-    public GameObject dogPrefab;
+public class PlayerControllerX : MonoBehaviour{
 
+    public GameObject dogPrefab;
     private float timeStart = 0.0f;
     private float timeRepeat = 1.0f;
     private bool acceptInput = false;
 
-    private void Start()
-    {
+    private void Start(){
+        /* If the user holds down the spacebar prevent him to spawn dogs constantly 
+        by making "SetAcceptInput" true only once every second */ 
         InvokeRepeating("SetAcceptInput", 0.0f, 1.0f);
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update(){
         // On spacebar press, send dog
-        if (Input.GetKeyDown(KeyCode.Space) && acceptInput)
-        {
+        if  (Input.GetKeyDown(KeyCode.Space) && acceptInput){
             Instantiate(dogPrefab, transform.position, dogPrefab.transform.rotation);
             acceptInput = false;
         }
     }
-
-    private void SetAcceptInput()
-    {
+    private void SetAcceptInput(){
         acceptInput = true;
     }
 }
